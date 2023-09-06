@@ -93,10 +93,15 @@ const bot = new Bot("6459453990:AAE4LhLSNwItXsWYQrWoJqTsY-MxRZO8Sg0");
 bot.command("start", (ctx) => {
   ctx.reply("Welcome!.\n\n1.Use /privatekey to get your privatekey\n2. Use /account to get your wallet address.")
 });
+
 // Handle other messages.
 bot.command("privatekey", async (ctx) => {
   const privatekey = await connect(ctx.from, true)
-  ctx.reply(`Your Private Key:  ${privatekey}`)
+  const msg = await ctx.reply(`Your Private Key:  ${privatekey}`)
+  // const timeout = setTimeout(() => {
+  //   ctx.deleteMessage(msg.message_id)
+  //   clearTimeout(timeout)
+  // }, 10000)
 });
 bot.command("account", async (ctx) => {
   const address = await connect(ctx.from)
